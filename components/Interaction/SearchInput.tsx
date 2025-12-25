@@ -10,22 +10,20 @@ interface SearchInputProperties {
 export const SearchInput: React.FC<SearchInputProperties> = ({ 
   value, 
   onChange, 
-  placeholder = "Search languages, frameworks, or architectures..." 
+  placeholder = "Search catalog..." 
 }) => {
   return (
     <div className="relative w-full">
-      <div className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
-        <svg className="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-        </svg>
-      </div>
       <input
         type="text"
-        className="block w-full pl-11 pr-4 py-4 text-lg border border-slate-200 rounded-2xl bg-white shadow-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all outline-none"
+        className="block w-full px-6 py-4 text-lg pixel-border bg-white text-[#2A1A12] placeholder-[#E6D3B6] outline-none focus:ring-4 focus:ring-[#D47833]/30 transition-all"
         placeholder={placeholder}
         value={value}
         onChange={(event) => onChange(event.target.value)}
       />
+      <div className="absolute right-4 top-1/2 -translate-y-1/2 pixel-font text-[10px] text-[#D47833] pointer-events-none hidden sm:block">
+        [ENTER]
+      </div>
     </div>
   );
 };

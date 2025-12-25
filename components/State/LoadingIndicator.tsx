@@ -3,13 +3,12 @@ import React from 'react';
 
 export const LoadingIndicator: React.FC = () => {
   return (
-    <div className="flex flex-col items-center justify-center py-10 space-y-4">
-      <div className="relative h-12 w-12">
-        <div className="absolute inset-0 rounded-full border-4 border-slate-100" />
-        <div className="absolute inset-0 rounded-full border-4 border-indigo-600 border-t-transparent animate-spin" />
+    <div className="flex flex-col items-center justify-center py-20 space-y-8">
+      <div className="w-12 h-12 pixel-border bg-[#D47833] animate-bounce relative">
+         <div className="absolute inset-2 bg-white/30"></div>
       </div>
-      <p className="text-sm font-medium text-slate-500 animate-pulse">
-        Synchronizing local catalog...
+      <p className="pixel-font text-[10px] text-[#E6D3B6] animate-pulse">
+        GATHERING ANCIENT KNOWLEDGE...
       </p>
     </div>
   );

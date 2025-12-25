@@ -39,7 +39,7 @@ export const DetailPage: React.FC = () => {
         }
       } catch (fetchError) {
         console.error('Failed to fetch boilerplate details', fetchError);
-        setError('Failed to load boilerplate details. It might not be available offline.');
+        setError('OFFLINE OR DATA LOST');
       } finally {
         setLoading(false);
       }
@@ -53,10 +53,8 @@ export const DetailPage: React.FC = () => {
       <PageContainer>
         <HeaderBar />
         <MainContentRegion>
-          <div className="animate-pulse space-y-8">
-            <div className="h-10 w-1/3 bg-slate-200 rounded" />
-            <div className="h-6 w-2/3 bg-slate-200 rounded" />
-            <div className="h-64 bg-slate-200 rounded-xl" />
+          <div className="max-w-4xl mx-auto pixel-font text-center animate-pulse py-20">
+            TRANSMITTING DATA...
           </div>
         </MainContentRegion>
       </PageContainer>
@@ -69,12 +67,12 @@ export const DetailPage: React.FC = () => {
         <HeaderBar />
         <MainContentRegion>
           <EmptyState 
-            title="Boilerplate not found" 
-            message={error || "We couldn't retrieve the requested information."} 
+            title="MISSING SCROLL" 
+            message={error || "NOT FOUND"} 
           />
           <div className="text-center mt-6">
-            <Link to="/" className="text-indigo-600 font-medium hover:underline">
-              &larr; Back to Search
+            <Link to="/" className="pixel-button pixel-font text-[10px] text-white">
+              RETURN TO TEMPLE
             </Link>
           </div>
         </MainContentRegion>
@@ -87,47 +85,46 @@ export const DetailPage: React.FC = () => {
       <HeaderBar />
       <MainContentRegion>
         <div className="max-w-4xl mx-auto">
-          <Link to="/" className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-indigo-600 mb-8 transition-colors">
-            <svg className="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            Back to Catalog
+          <Link to="/" className="pixel-font text-[10px] text-[#E6D3B6] hover:text-[#D47833] mb-8 inline-block transition-colors">
+            <span className="mr-2">&lt;&lt;</span> GO BACK
           </Link>
 
-          <div className="border-b border-slate-200 pb-8 mb-10">
-            <div className="flex flex-wrap items-center gap-4 mb-4">
-              <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">
-                {detail.name}
-              </h1>
-              <div className="flex gap-2">
+          <div className="bg-[#E6D3B6] pixel-border p-8 mb-12">
+            <div className="flex flex-col gap-6">
+              <div className="flex flex-wrap gap-2">
                 <Tag label={detail.language} variant="language" />
                 <Tag label={detail.framework} variant="framework" />
                 <Tag label={detail.architecture} variant="architecture" />
               </div>
+              <h1 className="pixel-font text-2xl sm:text-3xl text-[#2A1A12] leading-tight">
+                {detail.name}
+              </h1>
+              <p className="text-lg text-[#4A3528] font-bold leading-relaxed border-t-4 border-black/10 pt-6">
+                {detail.description}
+              </p>
             </div>
-            <p className="text-xl text-slate-600 leading-relaxed">
-              {detail.description}
-            </p>
           </div>
 
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-              <span className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mr-3 text-lg">1</span>
-              Architecture Overview
+          <section className="mb-16">
+            <h2 className="pixel-font text-sm text-[#D47833] mb-6 flex items-center">
+              <span className="w-8 h-8 pixel-border bg-[#C44D30] text-white flex items-center justify-center mr-4 text-[12px]">01</span>
+              ARCHITECTURE
             </h2>
-            <MonospaceBlock content={detail.architectureOverview} />
+            <div className="pixel-border bg-white overflow-hidden">
+               <MonospaceBlock content={detail.architectureOverview} />
+            </div>
           </section>
 
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-              <span className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mr-3 text-lg">2</span>
-              Adapter Patterns
+          <section className="mb-16">
+            <h2 className="pixel-font text-sm text-[#D47833] mb-6 flex items-center">
+              <span className="w-8 h-8 pixel-border bg-[#C44D30] text-white flex items-center justify-center mr-4 text-[12px]">02</span>
+              ADAPTERS
             </h2>
-            <div className="space-y-8">
+            <div className="grid gap-8">
               {detail.adapterPatterns.map((pattern, index) => (
-                <div key={index} className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
-                  <h3 className="text-lg font-bold text-slate-900 mb-3">{pattern.title}</h3>
-                  <div className="text-slate-600 leading-relaxed prose prose-slate">
+                <div key={index} className="bg-[#E6D3B6] pixel-border p-6">
+                  <h3 className="pixel-font text-[12px] text-[#2A1A12] mb-4 border-b-2 border-black/10 pb-2">{pattern.title}</h3>
+                  <div className="text-[#4A3528] font-bold leading-relaxed whitespace-pre-wrap">
                     {pattern.content}
                   </div>
                 </div>
@@ -135,14 +132,16 @@ export const DetailPage: React.FC = () => {
             </div>
           </section>
 
-          <section className="mb-12">
-            <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center">
-              <span className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center mr-3 text-lg">3</span>
-              Sample Implementations
+          <section className="mb-16">
+            <h2 className="pixel-font text-sm text-[#D47833] mb-6 flex items-center">
+              <span className="w-8 h-8 pixel-border bg-[#C44D30] text-white flex items-center justify-center mr-4 text-[12px]">03</span>
+              SAMPLES
             </h2>
-            <div className="space-y-4">
+            <div className="space-y-8">
               {detail.samples.map((sample, index) => (
-                <CodeBlock key={index} code={sample} language={detail.language} />
+                <div key={index} className="pixel-border bg-black">
+                   <CodeBlock code={sample} language={detail.language} />
+                </div>
               ))}
             </div>
           </section>

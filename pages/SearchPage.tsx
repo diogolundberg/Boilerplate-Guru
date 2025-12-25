@@ -24,7 +24,6 @@ export const SearchPage: React.FC = () => {
         const localVersion = await storageService.getStoredVersion();
         const localData = await storageService.getSummaries();
 
-        let currentVersion = localVersion;
         let currentData = localData;
 
         try {
@@ -33,7 +32,6 @@ export const SearchPage: React.FC = () => {
             const remoteData = await apiClient.getBoilerplates();
             await storageService.saveSummaries(remoteData);
             await storageService.setStoredVersion(remoteVersionResponse.version);
-            currentVersion = remoteVersionResponse.version;
             currentData = remoteData;
           }
         } catch (networkError) {
@@ -63,12 +61,20 @@ export const SearchPage: React.FC = () => {
     <PageContainer>
       <HeaderBar />
       <MainContentRegion>
-        <div className="max-w-3xl mx-auto mb-12 text-center">
-          <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-4">
-            Find your next <span className="text-indigo-600">scaffold</span>
+        <div className="max-w-4xl mx-auto mb-16 text-center">
+          <div className="mb-8 flex justify-center">
+             <div className="w-24 h-24 bg-[#E6D3B6] pixel-border p-2">
+                <div className="w-full h-full bg-[#D47833] pixel-border relative">
+                   <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#C44D30] pixel-border"></div>
+                   <div className="absolute bottom-4 left-2 right-2 h-4 bg-white/20"></div>
+                </div>
+             </div>
+          </div>
+          <h1 className="pixel-font text-2xl sm:text-4xl text-[#E6D3B6] mb-6 leading-relaxed">
+            FIND YOUR NEXT <span className="text-[#D47833]">SCAFFOLD</span>
           </h1>
-          <p className="text-lg text-slate-500 mb-8">
-            The curated catalog of high-quality software architectures.
+          <p className="text-sm font-bold text-[#E6D3B6]/70 mb-10 pixel-font tracking-tighter">
+            THE ANCIENT WISDOM OF REUSABLE CODE
           </p>
           <SearchInput value={query} onChange={setQuery} />
         </div>
@@ -76,7 +82,7 @@ export const SearchPage: React.FC = () => {
         {syncStatus === SyncStatus.Syncing && boilerplates.length === 0 ? (
           <LoadingIndicator />
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredResults.map((boilerplate) => (
               <BoilerplateResultCard 
                 key={boilerplate.identifier} 
@@ -88,12 +94,10 @@ export const SearchPage: React.FC = () => {
 
         {syncStatus === SyncStatus.Completed && filteredResults.length === 0 && (
           <EmptyState 
-            title="No boilerplates found" 
-            message={`We couldn't find anything matching "${query}". Try adjusting your search.`}
+            title="THE VOID ECHOES" 
+            message={`NOTHING FOUND MATCHING "${query.toUpperCase()}"`}
             icon={
-              <svg className="w-16 h-16 text-slate-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.172 9.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+              <div className="w-16 h-16 bg-[#2A1A12] pixel-border mx-auto flex items-center justify-center text-[#C44D30] pixel-font">?</div>
             }
           />
         )}

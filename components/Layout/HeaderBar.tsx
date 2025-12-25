@@ -19,14 +19,12 @@ export const HeaderBar: React.FC = () => {
   }, []);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b-4 border-black bg-[#E6D3B6] py-2">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center gap-2">
-          <Link to="/" className="flex items-center gap-2 group">
-            <div className="h-8 w-8 rounded bg-indigo-600 flex items-center justify-center text-white font-bold transition-transform group-hover:scale-110">
-              BG
-            </div>
-            <span className="text-xl font-bold tracking-tight text-slate-900">
+        <div className="flex items-center gap-4">
+          <Link to="/" className="flex items-center gap-4 group">
+            <div className="guru-head pixel-border scale-125" />
+            <span className="pixel-font text-xs sm:text-sm tracking-tighter text-[#2A1A12]">
               Boilerplate Guru
             </span>
           </Link>
@@ -34,14 +32,13 @@ export const HeaderBar: React.FC = () => {
         
         <div className="flex items-center gap-4">
           {!isOnline && (
-            <div className="flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1 text-xs font-medium text-amber-700 border border-amber-200">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
-              Offline Mode
+            <div className="pixel-border bg-[#C44D30] px-3 py-1 text-[10px] pixel-font text-white">
+              OFFLINE
             </div>
           )}
           {isOnline && (
-            <div className="text-xs text-slate-400 font-medium hidden sm:block">
-              Connected to Cloud Catalog
+            <div className="text-[10px] pixel-font text-[#4A3528] hidden sm:block opacity-70">
+              CLOUD SYNC OK
             </div>
           )}
         </div>

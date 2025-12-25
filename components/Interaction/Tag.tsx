@@ -10,18 +10,18 @@ export const Tag: React.FC<TagProperties> = ({ label, variant = 'default' }) => 
   const getVariantStyles = () => {
     switch (variant) {
       case 'language':
-        return 'bg-blue-50 text-blue-700 border-blue-100';
+        return 'bg-[#D47833] text-white border-black';
       case 'framework':
-        return 'bg-purple-50 text-purple-700 border-purple-100';
+        return 'bg-[#4A3528] text-[#E6D3B6] border-black';
       case 'architecture':
-        return 'bg-emerald-50 text-emerald-700 border-emerald-100';
+        return 'bg-[#C44D30] text-white border-black';
       default:
-        return 'bg-slate-100 text-slate-600 border-slate-200';
+        return 'bg-[#E6D3B6] text-[#2A1A12] border-black';
     }
   };
 
   return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium border ${getVariantStyles()}`}>
+    <span className={`inline-flex items-center px-2 py-1 text-[10px] font-bold border-2 pixel-font tracking-tighter ${getVariantStyles()}`}>
       {label}
     </span>
   );
