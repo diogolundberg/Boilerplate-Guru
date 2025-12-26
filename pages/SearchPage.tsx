@@ -68,11 +68,17 @@ export const SearchPage: React.FC = () => {
       <HeaderBar />
       <MainContentRegion>
         <div className="max-w-4xl mx-auto mb-16 text-center">
+          
+          <div className="mx-auto mb-8 w-24 h-24 bg-[#E6D3B6] pixel-border relative shadow-lg group hover:scale-105 transition-transform duration-300">
+            <div className="absolute top-6 left-8 w-4 h-4 bg-[#C44D30]"></div>
+            <div className="absolute bottom-0 left-0 right-0 h-8 bg-[#D47833] border-t-4 border-[#2A1A12]"></div>
+          </div>
+
           <h1 className="pixel-font text-2xl sm:text-4xl text-[#E6D3B6] mb-6 leading-relaxed">
             FIND YOUR NEXT <span className="text-[#D47833]">SCAFFOLD</span>
           </h1>
           <p className="text-sm font-bold text-[#E6D3B6]/70 mb-10 pixel-font tracking-tighter">
-            ARCHITECTURAL BLUEPRINTS FROM THE ARCHIVE
+            THE ANCIENT WISDOM OF REUSABLE CODE
           </p>
           
           <div className="max-w-2xl mx-auto">
