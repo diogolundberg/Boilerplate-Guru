@@ -8,7 +8,7 @@ import { BoilerplateResultCard } from '../components/Content/BoilerplateResultCa
 import { LoadingIndicator } from '../components/State/LoadingIndicator';
 import { EmptyState } from '../components/State/EmptyState';
 import { storageService } from '../services/storageService';
-import { apiClient } from '../services/apiClient';
+import { catalogService } from '../services/catalogService';
 import { searchService } from '../services/searchService';
 import { BoilerplateSummary, SyncStatus } from '../types';
 
@@ -27,15 +27,21 @@ export const SearchPage: React.FC = () => {
         let currentData = localData;
 
         try {
-          const remoteVersionResponse = await apiClient.getVersion();
+          const remoteVersionResponse = await catalogService.getVersion();
           if (!localVersion || remoteVersionResponse.version !== localVersion) {
-            const remoteData = await apiClient.getBoilerplates();
+            const remoteData = await catalogService.getList();
             await storageService.saveSummaries(remoteData);
             await storageService.setStoredVersion(remoteVersionResponse.version);
             currentData = remoteData;
           }
         } catch (networkError) {
           console.warn('Network sync failed, falling back to local data', networkError);
+        }
+
+        // If local storage was empty and network failed (or provided nothing), use what the service returns (demo data)
+        if (currentData.length === 0) {
+           const fallbackData = await catalogService.getList();
+           currentData = fallbackData;
         }
 
         setBoilerplates(currentData);

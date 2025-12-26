@@ -8,7 +8,7 @@ import { Tag } from '../components/Interaction/Tag';
 import { MonospaceBlock } from '../components/Content/MonospaceBlock';
 import { CodeBlock } from '../components/Content/CodeBlock';
 import { EmptyState } from '../components/State/EmptyState';
-import { apiClient } from '../services/apiClient';
+import { catalogService } from '../services/catalogService';
 import { storageService } from '../services/storageService';
 import { BoilerplateDetail } from '../types';
 
@@ -29,7 +29,7 @@ export const DetailPage: React.FC = () => {
         }
 
         try {
-          const remoteDetail = await apiClient.getBoilerplateDetail(identifier);
+          const remoteDetail = await catalogService.getDetail(identifier);
           await storageService.saveDetail(remoteDetail);
           setDetail(remoteDetail);
         } catch (networkError) {

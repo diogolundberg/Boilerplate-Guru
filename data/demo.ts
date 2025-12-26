@@ -1,10 +1,7 @@
 
-import { VersionResponse, BoilerplateSummary, BoilerplateDetail } from '../types';
+import { BoilerplateSummary, BoilerplateDetail } from '../types';
 
-// Replace this with your actual GitHub Raw URL
-const GITHUB_BASE = 'https://raw.githubusercontent.com/boilerplate-guru/catalog/main/data';
-
-const DEMO_SUMMARIES: BoilerplateSummary[] = [
+export const DEMO_SUMMARIES: BoilerplateSummary[] = [
   {
     identifier: "react-vite-ts",
     name: "React + Vite + TS",
@@ -34,7 +31,7 @@ const DEMO_SUMMARIES: BoilerplateSummary[] = [
   }
 ];
 
-const DEMO_DETAIL: BoilerplateDetail = {
+export const DEMO_DETAIL: BoilerplateDetail = {
   ...DEMO_SUMMARIES[0],
   architectureOverview: "src/\n  ├── assets/      # Static assets\n  ├── components/  # Shared UI components\n  ├── features/    # Feature-based modules\n  ├── hooks/       # Custom React hooks\n  ├── services/    # API clients\n  └── utils/       # Helper functions",
   adapterPatterns: [
@@ -47,35 +44,3 @@ const DEMO_DETAIL: BoilerplateDetail = {
     "// vite.config.ts\nexport default defineConfig({\n  plugins: [react()],\n  resolve: { alias: { '@': '/src' } }\n});"
   ]
 };
-
-class ApiClient {
-  private async request<T>(path: string): Promise<T> {
-    try {
-      const response = await fetch(`${GITHUB_BASE}${path}`);
-      if (!response.ok) {
-        throw new Error(`GitHub request failed: ${response.status}`);
-      }
-      return await response.json();
-    } catch (error) {
-      console.warn(`Fetch failed for ${path}, using demo data.`);
-      if (path.includes('index.json')) return DEMO_SUMMARIES as unknown as T;
-      if (path.includes('details')) return DEMO_DETAIL as unknown as T;
-      if (path.includes('version')) return { version: '1.0.0' } as unknown as T;
-      throw error;
-    }
-  }
-
-  async getVersion(): Promise<VersionResponse> {
-    return this.request<VersionResponse>('/version.json');
-  }
-
-  async getBoilerplates(): Promise<BoilerplateSummary[]> {
-    return this.request<BoilerplateSummary[]>('/index.json');
-  }
-
-  async getBoilerplateDetail(identifier: string): Promise<BoilerplateDetail> {
-    return this.request<BoilerplateDetail>(`/details/${identifier}.json`);
-  }
-}
-
-export const apiClient = new ApiClient();
