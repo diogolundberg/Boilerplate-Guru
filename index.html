@@ -1,14 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Boilerplate Guru</title>
+  
   <script src="https://cdn.tailwindcss.com"></script>
+  
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --guru-orange: #D47833;
@@ -17,20 +19,24 @@
       --guru-dark: #2A1A12;
       --guru-red: #C44D30;
     }
+
     body {
       font-family: 'JetBrains Mono', monospace;
       background-color: var(--guru-brown);
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%233a2a20' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
       color: var(--guru-cream);
     }
+
     .pixel-font {
       font-family: 'Press Start 2P', cursive;
     }
+
     .pixel-border {
       border: 4px solid var(--guru-dark);
       box-shadow: 4px 4px 0px var(--guru-dark);
       image-rendering: pixelated;
     }
+
     .pixel-button {
       position: relative;
       display: inline-block;
@@ -40,14 +46,16 @@
       box-shadow: inset -4px -4px 0px var(--guru-dark), 4px 4px 0px var(--guru-dark);
       transition: transform 0.1s;
     }
+
     .pixel-button:active {
       transform: translate(2px, 2px);
       box-shadow: inset -2px -2px 0px var(--guru-dark), 2px 2px 0px var(--guru-dark);
     }
+
     .mono {
       font-family: 'JetBrains Mono', monospace;
     }
-    /* Simple pixel guru head in CSS */
+
     .guru-head {
       width: 32px;
       height: 32px;
@@ -55,6 +63,7 @@
       position: relative;
       border: 2px solid var(--guru-dark);
     }
+
     .guru-head::before {
       content: "";
       position: absolute;
@@ -62,6 +71,7 @@
       width: 4px; height: 4px;
       background: var(--guru-red);
     }
+
     .guru-head::after {
       content: "";
       position: absolute;
@@ -71,6 +81,7 @@
       border-top: 2px solid var(--guru-dark);
     }
   </style>
+
 <script type="importmap">
 {
   "imports": {
@@ -79,12 +90,14 @@
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
     "fuse.js": "https://esm.sh/fuse.js@^7.1.0",
-    "idb": "https://esm.sh/idb@^8.0.3"
+    "idb": "https://esm.sh/idb@^8.0.3",
+    "@google/genai": "https://esm.sh/@google/genai@^1.34.0"
   }
 }
 </script>
 </head>
 <body class="antialiased">
   <div id="root"></div>
+  <script type="module" src="./index.tsx"></script>
 </body>
 </html>

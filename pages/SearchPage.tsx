@@ -62,21 +62,19 @@ export const SearchPage: React.FC = () => {
       <HeaderBar />
       <MainContentRegion>
         <div className="max-w-4xl mx-auto mb-16 text-center">
-          <div className="mb-8 flex justify-center">
-             <div className="w-24 h-24 bg-[#E6D3B6] pixel-border p-2">
-                <div className="w-full h-full bg-[#D47833] pixel-border relative">
-                   <div className="absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-[#C44D30] pixel-border"></div>
-                   <div className="absolute bottom-4 left-2 right-2 h-4 bg-white/20"></div>
-                </div>
-             </div>
-          </div>
           <h1 className="pixel-font text-2xl sm:text-4xl text-[#E6D3B6] mb-6 leading-relaxed">
             FIND YOUR NEXT <span className="text-[#D47833]">SCAFFOLD</span>
           </h1>
           <p className="text-sm font-bold text-[#E6D3B6]/70 mb-10 pixel-font tracking-tighter">
-            THE ANCIENT WISDOM OF REUSABLE CODE
+            ARCHITECTURAL BLUEPRINTS FROM THE ARCHIVE
           </p>
-          <SearchInput value={query} onChange={setQuery} />
+          
+          <div className="max-w-2xl mx-auto">
+            <SearchInput 
+              value={query} 
+              onChange={setQuery} 
+            />
+          </div>
         </div>
 
         {syncStatus === SyncStatus.Syncing && boilerplates.length === 0 ? (
