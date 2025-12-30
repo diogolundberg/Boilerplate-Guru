@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 
 interface EmptyStateProperties {
   title: string;
@@ -7,7 +6,11 @@ interface EmptyStateProperties {
   icon?: React.ReactNode;
 }
 
-export const EmptyState: React.FC<EmptyStateProperties> = ({ title, message, icon }) => {
+export const EmptyState: React.FC<EmptyStateProperties> = ({
+  title,
+  message,
+  icon,
+}) => {
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
       {icon && <div className="mb-4">{icon}</div>}

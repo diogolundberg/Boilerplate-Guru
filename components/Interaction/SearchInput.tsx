@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React from "react";
 
 interface SearchInputProperties {
   value: string;
@@ -7,10 +6,10 @@ interface SearchInputProperties {
   placeholder?: string;
 }
 
-export const SearchInput: React.FC<SearchInputProperties> = ({ 
-  value, 
-  onChange, 
-  placeholder = "Search catalog..." 
+export const SearchInput: React.FC<SearchInputProperties> = ({
+  value,
+  onChange,
+  placeholder = "Search catalog...",
 }) => {
   return (
     <div className="relative w-full">

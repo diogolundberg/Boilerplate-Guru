@@ -1,12 +1,14 @@
-
-import React from 'react';
+import React from "react";
 
 interface MonospaceBlockProperties {
   content: string;
   title?: string;
 }
 
-export const MonospaceBlock: React.FC<MonospaceBlockProperties> = ({ content, title }) => {
+export const MonospaceBlock: React.FC<MonospaceBlockProperties> = ({
+  content,
+  title,
+}) => {
   return (
     <div className="my-6">
       {title && (
