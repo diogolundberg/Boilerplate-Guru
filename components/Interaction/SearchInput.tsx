@@ -1,4 +1,5 @@
-import React from "react";
+
+import React from 'react';
 
 interface SearchInputProperties {
   value: string;
@@ -6,10 +7,10 @@ interface SearchInputProperties {
   placeholder?: string;
 }
 
-export const SearchInput: React.FC<SearchInputProperties> = ({
-  value,
-  onChange,
-  placeholder = "Search catalog...",
+export const SearchInput: React.FC<SearchInputProperties> = ({ 
+  value, 
+  onChange, 
+  placeholder = "Search catalog..." 
 }) => {
   return (
     <div className="relative w-full">
@@ -21,7 +22,7 @@ export const SearchInput: React.FC<SearchInputProperties> = ({
         onChange={(event) => onChange(event.target.value)}
       />
       <div className="absolute right-4 top-1/2 -translate-y-1/2 pixel-font text-[10px] text-[#D47833] pointer-events-none hidden sm:block">
-        [ENTER]
+        [SEARCH]
       </div>
     </div>
   );

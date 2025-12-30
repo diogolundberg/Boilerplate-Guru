@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export const HeaderBar: React.FC = () => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
@@ -8,12 +9,12 @@ export const HeaderBar: React.FC = () => {
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
 
     return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
     };
   }, []);
 
@@ -28,7 +29,7 @@ export const HeaderBar: React.FC = () => {
             </span>
           </Link>
         </div>
-
+        
         <div className="flex items-center gap-4">
           {!isOnline && (
             <div className="pixel-border bg-[#C44D30] px-3 py-1 text-[10px] pixel-font text-white">

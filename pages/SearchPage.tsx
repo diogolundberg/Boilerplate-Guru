@@ -1,18 +1,19 @@
-import React, { useState, useEffect, useMemo } from "react";
-import { HeaderBar } from "../components/Layout/HeaderBar";
-import { PageContainer } from "../components/Layout/PageContainer";
-import { MainContentRegion } from "../components/Layout/MainContentRegion";
-import { SearchInput } from "../components/Interaction/SearchInput";
-import { BoilerplateResultCard } from "../components/Content/BoilerplateResultCard";
-import { LoadingIndicator } from "../components/State/LoadingIndicator";
-import { EmptyState } from "../components/State/EmptyState";
-import { storageService } from "../services/storageService";
-import { catalogService } from "../services/catalogService";
-import { searchService } from "../services/searchService";
-import { BoilerplateSummary, SyncStatus } from "../types";
+
+import React, { useState, useEffect, useMemo } from 'react';
+import { HeaderBar } from '../components/Layout/HeaderBar';
+import { PageContainer } from '../components/Layout/PageContainer';
+import { MainContentRegion } from '../components/Layout/MainContentRegion';
+import { SearchInput } from '../components/Interaction/SearchInput';
+import { BoilerplateResultCard } from '../components/Content/BoilerplateResultCard';
+import { LoadingIndicator } from '../components/State/LoadingIndicator';
+import { EmptyState } from '../components/State/EmptyState';
+import { storageService } from '../services/storageService';
+import { catalogService } from '../services/catalogService';
+import { searchService } from '../services/searchService';
+import { BoilerplateSummary, SyncStatus } from '../types';
 
 export const SearchPage: React.FC = () => {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [boilerplates, setBoilerplates] = useState<BoilerplateSummary[]>([]);
   const [syncStatus, setSyncStatus] = useState<SyncStatus>(SyncStatus.Idle);
 
@@ -30,29 +31,24 @@ export const SearchPage: React.FC = () => {
           if (!localVersion || remoteVersionResponse.version !== localVersion) {
             const remoteData = await catalogService.getList();
             await storageService.saveSummaries(remoteData);
-            await storageService.setStoredVersion(
-              remoteVersionResponse.version,
-            );
+            await storageService.setStoredVersion(remoteVersionResponse.version);
             currentData = remoteData;
           }
         } catch (networkError) {
-          console.warn(
-            "Network sync failed, falling back to local data",
-            networkError,
-          );
+          console.warn('Network sync failed, falling back to local data', networkError);
         }
 
         // If local storage was empty and network failed (or provided nothing), use what the service returns (demo data)
         if (currentData.length === 0) {
-          const fallbackData = await catalogService.getList();
-          currentData = fallbackData;
+           const fallbackData = await catalogService.getList();
+           currentData = fallbackData;
         }
 
         setBoilerplates(currentData);
         searchService.initialize(currentData);
         setSyncStatus(SyncStatus.Completed);
       } catch (error) {
-        console.error("Initialization error", error);
+        console.error('Initialization error', error);
         setSyncStatus(SyncStatus.Error);
       }
     };
@@ -72,6 +68,7 @@ export const SearchPage: React.FC = () => {
       <HeaderBar />
       <MainContentRegion>
         <div className="max-w-4xl mx-auto mb-16 text-center">
+          
           <div className="mx-auto mb-8 w-24 h-24 bg-[#E6D3B6] pixel-border relative shadow-lg group hover:scale-105 transition-transform duration-300">
             <div className="absolute top-6 left-8 w-4 h-4 bg-[#C44D30]"></div>
             <div className="absolute bottom-0 left-0 right-0 h-8 bg-[#D47833] border-t-4 border-[#2A1A12]"></div>
@@ -83,9 +80,12 @@ export const SearchPage: React.FC = () => {
           <p className="text-sm font-bold text-[#E6D3B6]/70 mb-10 pixel-font tracking-tighter">
             THE ANCIENT WISDOM OF REUSABLE CODE
           </p>
-
+          
           <div className="max-w-2xl mx-auto">
-            <SearchInput value={query} onChange={setQuery} />
+            <SearchInput 
+              value={query} 
+              onChange={setQuery} 
+            />
           </div>
         </div>
 
@@ -94,26 +94,23 @@ export const SearchPage: React.FC = () => {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {filteredResults.map((boilerplate) => (
-              <BoilerplateResultCard
-                key={boilerplate.identifier}
-                boilerplate={boilerplate}
+              <BoilerplateResultCard 
+                key={boilerplate.identifier} 
+                boilerplate={boilerplate} 
               />
             ))}
           </div>
         )}
 
-        {syncStatus === SyncStatus.Completed &&
-          filteredResults.length === 0 && (
-            <EmptyState
-              title="THE VOID ECHOES"
-              message={`NOTHING FOUND MATCHING "${query.toUpperCase()}"`}
-              icon={
-                <div className="w-16 h-16 bg-[#2A1A12] pixel-border mx-auto flex items-center justify-center text-[#C44D30] pixel-font">
-                  ?
-                </div>
-              }
-            />
-          )}
+        {syncStatus === SyncStatus.Completed && filteredResults.length === 0 && (
+          <EmptyState 
+            title="THE VOID ECHOES" 
+            message={`NOTHING FOUND MATCHING "${query.toUpperCase()}"`}
+            icon={
+              <div className="w-16 h-16 bg-[#2A1A12] pixel-border mx-auto flex items-center justify-center text-[#C44D30] pixel-font">?</div>
+            }
+          />
+        )}
       </MainContentRegion>
     </PageContainer>
   );
